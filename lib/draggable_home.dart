@@ -23,6 +23,7 @@ class DraggableHome extends StatefulWidget {
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
+  
   const DraggableHome({
     Key? key,
     this.leading,
