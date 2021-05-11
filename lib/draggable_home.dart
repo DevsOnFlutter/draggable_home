@@ -23,7 +23,7 @@ class DraggableHome extends StatefulWidget {
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
-  
+
   const DraggableHome({
     Key? key,
     this.leading,
@@ -91,11 +91,9 @@ class _DraggableHomeState extends State<DraggableHome> {
             //isFullyCollapsed
             if (notification.metrics.extentBefore >
                 expandedHeight - AppBar().preferredSize.height - 40) {
-              if (!(isFullyCollapsed.value))
-                isFullyCollapsed.add(true);
+              if (!(isFullyCollapsed.value)) isFullyCollapsed.add(true);
             } else {
-              if ((isFullyCollapsed.value))
-                isFullyCollapsed.add(false);
+              if ((isFullyCollapsed.value)) isFullyCollapsed.add(false);
             }
           }
           return false;
