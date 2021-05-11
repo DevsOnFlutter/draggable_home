@@ -5,10 +5,10 @@ A draggable Flutter widget that makes implementing a Sliding up and fully-strech
 <br>
 
 <p>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/master/screenshots/example.gif"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/master/screenshots/1.jpg"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/master/screenshots/2.png"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/master/screenshots/3.png"/>
+<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/example.gif"/>
+<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/1.jpg"/>
+<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/2.png"/>
+<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/3.png"/>
 </p>
 <br>
 
