@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 
-class SliverPage extends StatefulWidget {
+class SliverHome extends StatefulWidget {
   @override
-  _SliverPageState createState() => _SliverPageState();
+  _SliverHomeState createState() => _SliverHomeState();
 
   final Widget title;
   final double headerExpandedHeight;
@@ -26,7 +26,7 @@ class SliverPage extends StatefulWidget {
   final Widget expandedBody;
   final double stretchMaxHeight;
 
-  const SliverPage({
+  const SliverHome({
     Key key,
     this.title,
     this.body,
@@ -56,7 +56,7 @@ class SliverPage extends StatefulWidget {
         super(key: key);
 }
 
-class _SliverPageState extends State<SliverPage> {
+class _SliverHomeState extends State<SliverHome> {
   final BehaviorSubject<bool> isFullyExpanded =
       BehaviorSubject<bool>.seeded(false);
   final BehaviorSubject<bool> isFullyCollapsed =
