@@ -3,17 +3,12 @@ library sliver_home;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
 
 class SliverPage extends StatefulWidget {
   @override
   _SliverPageState createState() => _SliverPageState();
 
-  final String title;
+  final Widget title;
   final double headerExpandedHeight;
   final List<Widget> body;
   final Color backgroundColor;
@@ -21,7 +16,7 @@ class SliverPage extends StatefulWidget {
   final Widget leading;
   final Widget drawer;
   final List<Widget> actions;
-  final Widget bottomNavigationBar;
+  // final Widget bottomNavigationBar;
   final Widget floatingActionButton;
   final FloatingActionButtonLocation floatingActionButtonLocation;
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
@@ -42,7 +37,7 @@ class SliverPage extends StatefulWidget {
     this.leading,
     this.drawer,
     this.actions,
-    this.bottomNavigationBar,
+    // this.bottomNavigationBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
@@ -112,7 +107,7 @@ class _SliverPageState extends State<SliverPage> {
         child: sliver(context, appBarHeight, fullyExpandedHeight,
             expandedHeight, topPadding),
       ),
-      bottomNavigationBar: widget.bottomNavigationBar,
+      // bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
@@ -149,10 +144,7 @@ class _SliverPageState extends State<SliverPage> {
                   return AnimatedOpacity(
                     opacity: streams[0] ? 1 : 0,
                     duration: Duration(milliseconds: 100),
-                    child: Text(
-                      widget.title,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
+                    child: widget.title,
                   );
                 },
               ),
