@@ -7,32 +7,32 @@ class DraggableHome extends StatefulWidget {
   @override
   _DraggableHomeState createState() => _DraggableHomeState();
 
-  final Widget leading;
+  final Widget? leading;
   final Widget title;
-  final List<Widget> actions;
+  final List<Widget>? actions;
   final double headerExpandedHeight;
   final Widget headerWidget;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final double curvedBodyRadius;
   final List<Widget> body;
-  final Widget drawer;
+  final Widget? drawer;
   final bool fullyStretchable;
   final double stretchTriggerOffset;
-  final Widget expandedBody;
+  final Widget? expandedBody;
   final double stretchMaxHeight;
-  final Widget floatingActionButton;
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final FloatingActionButtonAnimator? floatingActionButtonAnimator;
   const DraggableHome({
-    Key key,
+    Key? key,
     this.leading,
-    @required this.title,
+    required this.title,
     this.actions,
     this.headerExpandedHeight = 0.35,
-    @required this.headerWidget,
+    required this.headerWidget,
     this.backgroundColor,
     this.curvedBodyRadius = 20,
-    @required this.body,
+    required this.body,
     this.drawer,
     this.fullyStretchable = false,
     this.stretchTriggerOffset = 200,
@@ -41,10 +41,7 @@ class DraggableHome extends StatefulWidget {
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
-  })  : assert(title != null),
-        assert(body != null),
-        assert(headerWidget != null),
-        assert(headerExpandedHeight > 0.0 &&
+  })  : assert(headerExpandedHeight > 0.0 &&
             headerExpandedHeight < stretchMaxHeight),
         assert(
           (stretchMaxHeight > headerExpandedHeight) && (stretchMaxHeight < .95),
@@ -86,17 +83,17 @@ class _DraggableHomeState extends State<DraggableHome> {
         onNotification: (notification) {
           if (notification.metrics.axis == Axis.vertical) {
             // isFullyCollapsed
-            if ((isFullyExpanded.value ?? false) &&
+            if ((isFullyExpanded.value) &&
                 notification.metrics.extentBefore > 100) {
               isFullyExpanded.add(false);
             }
             //isFullyCollapsed
             if (notification.metrics.extentBefore >
                 expandedHeight - AppBar().preferredSize.height - 40) {
-              if (!(isFullyCollapsed.value ?? false))
+              if (!(isFullyCollapsed.value))
                 isFullyCollapsed.add(true);
             } else {
-              if ((isFullyCollapsed.value ?? false))
+              if ((isFullyCollapsed.value))
                 isFullyCollapsed.add(false);
             }
           }
