@@ -204,24 +204,7 @@ class _SliverHomeState extends State<SliverHome> {
               ),
               Column(
                 children: [
-                  StreamBuilder<bool>(
-                      stream: isFullyExpanded.stream,
-                      initialData: false,
-                      builder: (context, snapshot) {
-                        return AnimatedContainer(
-                          duration: Duration(milliseconds: 500),
-                          height: (snapshot.data ?? false) ? 25 : 0,
-                          width: MediaQuery.of(context).size.width,
-                          child: Center(
-                            child: Icon(
-                              Icons.keyboard_arrow_up_rounded,
-                              color: (snapshot.data ?? false)
-                                  ? null
-                                  : Colors.transparent,
-                            ),
-                          ),
-                        );
-                      }),
+                  expandedUpArrow(),
                   //Body
                   ...widget.body
                 ],
@@ -231,5 +214,23 @@ class _SliverHomeState extends State<SliverHome> {
         ],
       ),
     );
+  }
+
+  StreamBuilder<bool> expandedUpArrow() {
+    return StreamBuilder<bool>(
+        stream: isFullyExpanded.stream,
+        builder: (context, snapshot) {
+          return AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            height: (snapshot.data ?? false) ? 25 : 0,
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Icon(
+                Icons.keyboard_arrow_up_rounded,
+                color: (snapshot.data ?? false) ? null : Colors.transparent,
+              ),
+            ),
+          );
+        });
   }
 }
