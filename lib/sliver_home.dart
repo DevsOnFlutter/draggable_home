@@ -13,6 +13,7 @@ class SliverHome extends StatefulWidget {
   final double headerExpandedHeight;
   final Widget headerWidget;
   final Color backgroundColor;
+  final double curvedBodyRadius;
   final List<Widget> body;
   final Widget drawer;
   final bool fullyStretchable;
@@ -22,24 +23,24 @@ class SliverHome extends StatefulWidget {
   final Widget floatingActionButton;
   final FloatingActionButtonLocation floatingActionButtonLocation;
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
-
   const SliverHome({
     Key key,
-    @required this.title,
-    @required this.body,
-    @required this.headerWidget,
-    this.headerExpandedHeight = 0.5,
-    this.backgroundColor,
     this.leading,
-    this.drawer,
+    @required this.title,
     this.actions,
-    this.floatingActionButton,
-    this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator,
+    this.headerExpandedHeight = 0.35,
+    @required this.headerWidget,
+    this.backgroundColor,
+    this.curvedBodyRadius = 20,
+    @required this.body,
+    this.drawer,
     this.fullyStretchable = false,
     this.stretchTriggerOffset = 200,
     this.expandedBody,
     this.stretchMaxHeight = 0.9,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator,
   })  : assert(title != null),
         assert(body != null),
         assert(headerWidget != null),
@@ -66,7 +67,8 @@ class _SliverHomeState extends State<SliverHome> {
 
   @override
   Widget build(BuildContext context) {
-    final double appBarHeight = AppBar().preferredSize.height + 20;
+    final double appBarHeight =
+        AppBar().preferredSize.height + widget.curvedBodyRadius;
 
     final double topPadding = MediaQuery.of(context).padding.top;
 
@@ -103,7 +105,6 @@ class _SliverHomeState extends State<SliverHome> {
         child: sliver(context, appBarHeight, fullyExpandedHeight,
             expandedHeight, topPadding),
       ),
-      // bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
@@ -150,7 +151,9 @@ class _SliverHomeState extends State<SliverHome> {
                   FlexibleSpaceBar(
                     background: Container(
                         child: streams[1]
-                            ? widget.expandedBody
+                            ? (widget.expandedBody == null
+                                ? Container()
+                                : widget.expandedBody)
                             : widget.headerWidget),
                   ),
                   Positioned(
@@ -177,12 +180,12 @@ class _SliverHomeState extends State<SliverHome> {
 
   Container roundedCorner(BuildContext context) {
     return Container(
-      height: 20,
+      height: widget.curvedBodyRadius,
       decoration: BoxDecoration(
         color:
             widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(
-          top: const Radius.circular(20),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(widget.curvedBodyRadius),
         ),
       ),
     );
