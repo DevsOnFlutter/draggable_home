@@ -3,45 +3,40 @@ library sliver_home;
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-
 class SliverHome extends StatefulWidget {
   @override
   _SliverHomeState createState() => _SliverHomeState();
 
-  final Widget title;
-  final double headerExpandedHeight;
-  final List<Widget> body;
-  final Color backgroundColor;
-  final PreferredSizeWidget bottom;
   final Widget leading;
-  final Widget drawer;
+  final Widget title;
   final List<Widget> actions;
-  // final Widget bottomNavigationBar;
-  final Widget floatingActionButton;
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
+  final double headerExpandedHeight;
   final Widget headerWidget;
-  final bool stretchTrigger;
+  final Color backgroundColor;
+  final List<Widget> body;
+  final Widget drawer;
+  final bool fullyStretchable;
   final double stretchTriggerOffset;
   final Widget expandedBody;
   final double stretchMaxHeight;
+  final Widget floatingActionButton;
+  final FloatingActionButtonLocation floatingActionButtonLocation;
+  final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
   const SliverHome({
     Key key,
-    this.title,
-    this.body,
-    this.headerWidget,
+    @required this.title,
+    @required this.body,
+    @required this.headerWidget,
     this.headerExpandedHeight = 0.5,
     this.backgroundColor,
-    this.bottom,
     this.leading,
     this.drawer,
     this.actions,
-    // this.bottomNavigationBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
-    this.stretchTrigger = false,
+    this.fullyStretchable = false,
     this.stretchTriggerOffset = 200,
     this.expandedBody,
     this.stretchMaxHeight = 0.9,
@@ -82,7 +77,8 @@ class _SliverHomeState extends State<SliverHome> {
         MediaQuery.of(context).size.height * (widget.stretchMaxHeight);
 
     return Scaffold(
-      backgroundColor: widget.backgroundColor,
+      backgroundColor:
+          widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
       drawer: widget.drawer,
       body: NotificationListener<ScrollNotification>(
         onNotification: (notification) {
@@ -133,7 +129,6 @@ class _SliverHomeState extends State<SliverHome> {
             return SliverAppBar(
               leading: widget.leading,
               actions: widget.actions,
-              bottom: widget.bottom,
               elevation: 0,
               pinned: true,
               stretch: true,
@@ -167,7 +162,7 @@ class _SliverHomeState extends State<SliverHome> {
                 ],
               ),
               stretchTriggerOffset: widget.stretchTriggerOffset,
-              onStretchTrigger: widget.stretchTrigger
+              onStretchTrigger: widget.fullyStretchable
                   ? () async {
                       if (streams[1] == false) isFullyExpanded.add(true);
                     }
@@ -184,7 +179,8 @@ class _SliverHomeState extends State<SliverHome> {
     return Container(
       height: 20,
       decoration: BoxDecoration(
-        color: widget.backgroundColor,
+        color:
+            widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.vertical(
           top: const Radius.circular(20),
         ),
@@ -200,7 +196,8 @@ class _SliverHomeState extends State<SliverHome> {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height - topHeight,
-                color: widget.backgroundColor,
+                color: widget.backgroundColor ??
+                    Theme.of(context).scaffoldBackgroundColor,
               ),
               Column(
                 children: [
