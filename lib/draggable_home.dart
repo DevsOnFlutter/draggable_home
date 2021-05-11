@@ -10,12 +10,12 @@ class DraggableHome extends StatefulWidget {
   final Widget? leading;
   final Widget title;
   final List<Widget>? actions;
+  final Widget? drawer;
   final double headerExpandedHeight;
   final Widget headerWidget;
   final Color? backgroundColor;
   final double curvedBodyRadius;
   final List<Widget> body;
-  final Widget? drawer;
   final bool fullyStretchable;
   final double stretchTriggerOffset;
   final Widget? expandedBody;
