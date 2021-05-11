@@ -1,11 +1,11 @@
-library sliver_home;
+library draggable_home;
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-class SliverHome extends StatefulWidget {
+class DraggableHome extends StatefulWidget {
   @override
-  _SliverHomeState createState() => _SliverHomeState();
+  _DraggableHomeState createState() => _DraggableHomeState();
 
   final Widget leading;
   final Widget title;
@@ -23,7 +23,7 @@ class SliverHome extends StatefulWidget {
   final Widget floatingActionButton;
   final FloatingActionButtonLocation floatingActionButtonLocation;
   final FloatingActionButtonAnimator floatingActionButtonAnimator;
-  const SliverHome({
+  const DraggableHome({
     Key key,
     this.leading,
     @required this.title,
@@ -52,7 +52,7 @@ class SliverHome extends StatefulWidget {
         super(key: key);
 }
 
-class _SliverHomeState extends State<SliverHome> {
+class _DraggableHomeState extends State<DraggableHome> {
   final BehaviorSubject<bool> isFullyExpanded =
       BehaviorSubject<bool>.seeded(false);
   final BehaviorSubject<bool> isFullyCollapsed =
