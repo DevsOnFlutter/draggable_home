@@ -1,4 +1,4 @@
-# sliver_home
+# Draggable Home
 
 A new Flutter package project.
 
