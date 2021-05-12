@@ -1,6 +1,6 @@
 # Draggable Home
 
-A draggable Flutter widget that makes implementing a Sliding up and fully-strechable much easier! Based on the Scaffold and Sliver.
+A draggable Flutter widget that makes implementing a Sliding up and fully-stretchable  much easier! Based on the Scaffold and Sliver.
 
 <br>
 
