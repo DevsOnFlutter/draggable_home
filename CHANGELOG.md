@@ -1,3 +1,7 @@
+## v1.0.1
+
+* Added centerTitle
+
 ## v1.0.0
 
 * Sound null-safe release.
