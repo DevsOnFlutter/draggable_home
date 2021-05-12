@@ -32,7 +32,7 @@ dependencies:
 **DraggableHome** requires you to provide `title`, `headerWidget` and `body`:
 * `title` widget is basically for title in AppBar. For no title in appbar, simply put an empty Contnainer.
 * `headerWidget` is the expanded widget  just above body when not fully expanded.
-* `body` is in the form of Column which requires list of widget or a widget. Do not add any verically scrollable widge or you may just disable the scrollable
+* `body` is in the form of Column which requires list of widget or a widget. Do not add any verically scrollable widge or you may just disable the scroll.
 ```dart
   physics: const NeverScrollableScrollPhysics()
 ```
@@ -101,6 +101,8 @@ DraggableHome(
   ]
 );
 ```
+<br>
+<br>
 ## Contributions
 
 Contributions are welcomed!
