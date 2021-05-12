@@ -9,6 +9,7 @@ class DraggableHome extends StatefulWidget {
 
   final Widget? leading;
   final Widget title;
+  final bool centerTitle;
   final List<Widget>? actions;
   final Widget? drawer;
   final double headerExpandedHeight;
@@ -29,6 +30,7 @@ class DraggableHome extends StatefulWidget {
     Key? key,
     this.leading,
     required this.title,
+    this.centerTitle = true,
     this.actions,
     this.headerExpandedHeight = 0.35,
     required this.headerWidget,
@@ -130,7 +132,7 @@ class _DraggableHomeState extends State<DraggableHome> {
               elevation: 0,
               pinned: true,
               stretch: true,
-              centerTitle: true,
+              centerTitle: widget.centerTitle,
               title: StreamBuilder<bool>(
                 stream: null,
                 builder: (context, snapshot) {
