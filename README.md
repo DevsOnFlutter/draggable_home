@@ -58,6 +58,7 @@ There are several options that allow for more control:
 | `leading` | A widget to display before the toolbar's title. |
 | `action` | A list of Widgets to display in a row after the title widget. |
 | `drawer` | Drawers are typically used with the Scaffold.drawer property. |
+| `centerTitle` | Allows toggling of title from the center. By default title is in the center.|
 | `headerExpandedHeight` | Height of the header widget. The height is a double between 0.0 and 1.0. The default value of height is 0.35 and should be less than **stretchMaxHeight** |
 | `headerWidget` | A widget to display Header above body. |
 | `backgroundColor` | The color of the Material widget that underlies the entire DraggableHome body. |
