@@ -3,12 +3,10 @@
 A draggable Flutter widget that makes implementing a Sliding up and fully-stretchable  much easier! Based on the Scaffold and Sliver.
 
 <br>
-
 <p>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/example.gif"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/1.jpg"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/2.png"/>
-<img width="205px" alt="Example" src="https://github.com/4-alok/draggable_home/raw/main/screenshots/3.png"/>
+<a href="https://play.google.com/store/apps/details?id=com.hackthedeveloper.recite"><img width="205px" alt="Example" src="https://imgur.com/8rwRBWe.gif"/></a>
+<img width="205px" alt="Example" src="https://imgur.com/lAtgU0E.gif"/>
+<img width="205px" alt="Example" src="https://imgur.com/QS7y9OU.gif"/>
 </p>
 <br>
 
@@ -61,12 +59,17 @@ There are several options that allow for more control:
 | `centerTitle` | Allows toggling of title from the center. By default title is in the center.|
 | `headerExpandedHeight` | Height of the header widget. The height is a double between 0.0 and 1.0. The default value of height is 0.35 and should be less than **stretchMaxHeight** |
 | `headerWidget` | A widget to display Header above body. |
+|`alwaysShowLeadingAndAction`| This make Leading and Action always visible. Default value is false. |
+|`headerBottomBar`| AppBar or toolBar like widget just above the body. | 
 | `backgroundColor` | The color of the Material widget that underlies the entire DraggableHome body. |
 | `curvedBodyRadius` | Creates a border top left and top right radius of body, Default radius of the body is 20.0. For no radius simply set value to **0**.|
 | `fullyStretchable` | Allows toggling of fully expand draggability of the DraggableHome. Set this to true to allow the user to fully expand the header. |
 | `stretchTriggerOffset` | The offset of overscroll required to fully expand the header.|
 | `expandedBody` | A widget to display when fully expanded as header or expandedBody above body. |
 | `stretchMaxHeight` | Height of the expandedBody widget. The height is a double between 0.0 and 0.95. The default value of height is 0.9 and should be greater than **headerExpandedHeight**  |
+| `bottomSheet` | A persistent bottom sheet shows information that supplements the primary content of the app. A persistent bottom sheet remains visible even when the user interacts with other parts of the app.|
+|`bottomNavigationBarHeight`| This is requires when using custom height to adjust body height. This make no effect on **bottomNavigationBar**.|
+|`bottomNavigationBar` | Snack bars slide from underneath the bottom navigation bar while bottom sheets are stacked on top. |
 | `floatingActionButton` | A floating action button is a circular icon button that hovers over content to promote a primary action in the application. |
 | `floatingActionButtonLocation` | An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.|
 | `floatingActionButtonAnimator` | Provider of animations to move the FloatingActionButton between FloatingActionButtonLocations. |
@@ -87,7 +90,9 @@ DraggableHome(
 
     // shrinkWrap true required for ListView.builder()
     // disable the scroll for any verically scrollable widget
+    // provide top padding 0 to fix extra space in listView
     ListView.builder(
+      padding: EdgeInsets.only(top: 0),
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: list.length,
@@ -104,6 +109,15 @@ DraggableHome(
 ```
 <br>
 <br>
+
+<br>
+<p>
+<img width="205px" alt="Example" src="https://imgur.com/q6lrXad.gif"/>
+<img width="205px" alt="Example" src="https://imgur.com/zdv0jS6.png"/>
+<img width="205px" alt="Example" src="https://imgur.com/m0MXP2P.png"/>
+</p>
+<br>
+
 ## Contributions
 
 Contributions are welcomed!

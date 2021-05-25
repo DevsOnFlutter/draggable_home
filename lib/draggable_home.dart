@@ -1,5 +1,6 @@
 library draggable_home;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -11,9 +12,11 @@ class DraggableHome extends StatefulWidget {
   final Widget title;
   final bool centerTitle;
   final List<Widget>? actions;
+  final bool alwaysShowLeadingAndAction;
   final Widget? drawer;
   final double headerExpandedHeight;
   final Widget headerWidget;
+  final Widget? headerBottomBar;
   final Color? backgroundColor;
   final double curvedBodyRadius;
   final List<Widget> body;
@@ -22,6 +25,9 @@ class DraggableHome extends StatefulWidget {
   final Widget? expandedBody;
   final double stretchMaxHeight;
   final Widget? floatingActionButton;
+  final Widget? bottomSheet;
+  final double? bottomNavigationBarHeight;
+  final Widget? bottomNavigationBar;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
@@ -32,8 +38,10 @@ class DraggableHome extends StatefulWidget {
     required this.title,
     this.centerTitle = true,
     this.actions,
+    this.alwaysShowLeadingAndAction = false,
     this.headerExpandedHeight = 0.35,
     required this.headerWidget,
+    this.headerBottomBar,
     this.backgroundColor,
     this.curvedBodyRadius = 20,
     required this.body,
@@ -42,6 +50,9 @@ class DraggableHome extends StatefulWidget {
     this.stretchTriggerOffset = 200,
     this.expandedBody,
     this.stretchMaxHeight = 0.9,
+    this.bottomSheet,
+    this.bottomNavigationBarHeight = kBottomNavigationBarHeight,
+    this.bottomNavigationBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
@@ -104,6 +115,8 @@ class _DraggableHomeState extends State<DraggableHome> {
         child: sliver(context, appBarHeight, fullyExpandedHeight,
             expandedHeight, topPadding),
       ),
+      bottomSheet: widget.bottomSheet,
+      bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
@@ -127,8 +140,16 @@ class _DraggableHomeState extends State<DraggableHome> {
             List<bool> streams = (snapshot.data ?? [false, false]);
 
             return SliverAppBar(
-              leading: widget.leading,
-              actions: widget.actions,
+              leading: widget.alwaysShowLeadingAndAction
+                  ? widget.leading
+                  : !streams[0]
+                      ? SizedBox()
+                      : widget.leading,
+              actions: widget.alwaysShowLeadingAndAction
+                  ? widget.actions
+                  : !streams[0]
+                      ? []
+                      : widget.actions,
               elevation: 0,
               pinned: true,
               stretch: true,
@@ -160,6 +181,25 @@ class _DraggableHomeState extends State<DraggableHome> {
                     left: 0,
                     right: 0,
                     child: roundedCorner(context),
+                  ),
+                  Positioned(
+                    bottom: 0 + widget.curvedBodyRadius,
+                    child: AnimatedContainer(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      curve: Curves.easeInOutCirc,
+                      duration: Duration(milliseconds: 100),
+                      height: streams[0]
+                          ? 0
+                          : streams[1]
+                              ? 0
+                              : kToolbarHeight,
+                      width: MediaQuery.of(context).size.width,
+                      child: streams[0]
+                          ? SizedBox()
+                          : streams[1]
+                              ? SizedBox()
+                              : widget.headerBottomBar ?? Container(),
+                    ),
                   )
                 ],
               ),
@@ -191,13 +231,17 @@ class _DraggableHomeState extends State<DraggableHome> {
   }
 
   SliverList sliverList(BuildContext context, double topHeight) {
+    final double bottomPadding =
+        widget.bottomNavigationBar == null ? 0 : kBottomNavigationBarHeight;
     return SliverList(
       delegate: SliverChildListDelegate(
         [
           Stack(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height - topHeight,
+                height: MediaQuery.of(context).size.height -
+                    topHeight -
+                    bottomPadding,
                 color: widget.backgroundColor ??
                     Theme.of(context).scaffoldBackgroundColor,
               ),
