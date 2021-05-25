@@ -12,7 +12,7 @@ A draggable Flutter widget that makes implementing a Sliding up and fully-stretc
 
 ## Usage
 
-Make sure to check out [examples](https://github.com/) for more details.
+Make sure to check out [examples](https://github.com/4-alok/draggable_home/blob/main/example/lib/main.dart) for more details.
 
 ### Installation
 
@@ -20,12 +20,12 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  draggable_home: ^1.0.0
+  draggable_home: ^1.0.2
 ```
 
 ### Basic setup
 
-*The complete example is available [here](https://github.com/).*
+*The complete example is available [here](https://github.com/4-alok/draggable_home/blob/main/example/lib/main.dart).*
 
 **DraggableHome** requires you to provide `title`, `headerWidget` and `body`:
 * `title` widget is basically for title in AppBar. For no title in appbar, simply put an empty Contnainer.
@@ -108,7 +108,6 @@ DraggableHome(
 );
 ```
 <br>
-<br>
 
 <br>
 <p>
@@ -117,6 +116,12 @@ DraggableHome(
 <img width="205px" alt="Example" src="https://imgur.com/m0MXP2P.png"/>
 </p>
 <br>
+
+
+## Show some :heart: and :star: the repo
+
+[![GitHub followers](https://img.shields.io/github/followers/4-alok?style=social)](https://github.com/4-alok/)
+[![GitHub followers](https://img.shields.io/github/stars/4-alok/draggable_home?style=social)](https://github.com/4-alok/)
 
 ## Contributions
 
