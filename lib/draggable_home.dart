@@ -8,27 +8,72 @@ class DraggableHome extends StatefulWidget {
   @override
   _DraggableHomeState createState() => _DraggableHomeState();
 
+  /// Leading: A widget to display before the toolbar's title.
   final Widget? leading;
+
+  /// Title: A Widget to display title in AppBar
   final Widget title;
+
+  /// Center Title: Allows toggling of title from the center. By default title is in the center.
   final bool centerTitle;
+
+  /// Action: A list of Widgets to display in a row after the title widget.
   final List<Widget>? actions;
+
+  /// Always Show Leading And Action : This make Leading and Action always visible. Default value is false.
   final bool alwaysShowLeadingAndAction;
+
+  /// Drawer: Drawers are typically used with the Scaffold.drawer property.
   final Widget? drawer;
+
+  /// Header Expanded Height : Height of the header widget. The height is a double between 0.0 and 1.0. The default value of height is 0.35 and should be less than stretchMaxHeigh
   final double headerExpandedHeight;
+
+  /// Header Widget: A widget to display Header above body.
   final Widget headerWidget;
+
+  /// headerBottomBar: AppBar or toolBar like widget just above the body.
+
   final Widget? headerBottomBar;
+
+  /// backgroundColor: The color of the Material widget that underlies the entire DraggableHome body.
   final Color? backgroundColor;
+
+  /// curvedBodyRadius: Creates a border top left and top right radius of body, Default radius of the body is 20.0. For no radius simply set value to 0.
   final double curvedBodyRadius;
+
+  /// body: A widget to Body
   final List<Widget> body;
+
+  /// fullyStretchable: Allows toggling of fully expand draggability of the DraggableHome. Set this to true to allow the user to fully expand the header.
   final bool fullyStretchable;
+
+  /// stretchTriggerOffset: The offset of overscroll required to fully expand the header.
   final double stretchTriggerOffset;
+
+  /// expandedBody: A widget to display when fully expanded as header or expandedBody above body.
   final Widget? expandedBody;
+
+  /// stretchMaxHeight: Height of the expandedBody widget. The height is a double between 0.0 and 0.95. The default value of height is 0.9 and should be greater than headerExpandedHeight
   final double stretchMaxHeight;
+
+  /// floatingActionButton: An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.
   final Widget? floatingActionButton;
+
+  /// bottomSheet: A persistent bottom sheet shows information that supplements the primary content of the app. A persistent bottom sheet remains visible even when the user interacts with other parts of the app.
   final Widget? bottomSheet;
+
+  /// bottomNavigationBarHeight: This is requires when using custom height to adjust body height. This make no effect on bottomNavigationBar.
   final double? bottomNavigationBarHeight;
+
+  /// bottomNavigationBar: Snack bars slide from underneath the bottom navigation bar while bottom sheets are stacked on top.
   final Widget? bottomNavigationBar;
+
+  /// floatingActionButtonLocation: An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.
+
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  /// floatingActionButtonAnimator: Provider of animations to move the FloatingActionButton between FloatingActionButtonLocations.
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
   /// This will create DraggableHome.

@@ -1,8 +1,8 @@
 name: draggable_home
 description: Draggable is a library for adding a beautiful draggable home page
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/4-alok/draggable_home
-documentation: https://github.com/4-alok/draggable_home/edit/master/README.md
+documentation: https://github.com/4-alok/draggable_home/blob/main/README.md
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
