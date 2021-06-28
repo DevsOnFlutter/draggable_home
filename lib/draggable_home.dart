@@ -1,5 +1,6 @@
 library draggable_home;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,22 +8,72 @@ class DraggableHome extends StatefulWidget {
   @override
   _DraggableHomeState createState() => _DraggableHomeState();
 
+  /// Leading: A widget to display before the toolbar's title.
   final Widget? leading;
+
+  /// Title: A Widget to display title in AppBar
   final Widget title;
+
+  /// Center Title: Allows toggling of title from the center. By default title is in the center.
   final bool centerTitle;
+
+  /// Action: A list of Widgets to display in a row after the title widget.
   final List<Widget>? actions;
+
+  /// Always Show Leading And Action : This make Leading and Action always visible. Default value is false.
+  final bool alwaysShowLeadingAndAction;
+
+  /// Drawer: Drawers are typically used with the Scaffold.drawer property.
   final Widget? drawer;
+
+  /// Header Expanded Height : Height of the header widget. The height is a double between 0.0 and 1.0. The default value of height is 0.35 and should be less than stretchMaxHeigh
   final double headerExpandedHeight;
+
+  /// Header Widget: A widget to display Header above body.
   final Widget headerWidget;
+
+  /// headerBottomBar: AppBar or toolBar like widget just above the body.
+
+  final Widget? headerBottomBar;
+
+  /// backgroundColor: The color of the Material widget that underlies the entire DraggableHome body.
   final Color? backgroundColor;
+
+  /// curvedBodyRadius: Creates a border top left and top right radius of body, Default radius of the body is 20.0. For no radius simply set value to 0.
   final double curvedBodyRadius;
+
+  /// body: A widget to Body
   final List<Widget> body;
+
+  /// fullyStretchable: Allows toggling of fully expand draggability of the DraggableHome. Set this to true to allow the user to fully expand the header.
   final bool fullyStretchable;
+
+  /// stretchTriggerOffset: The offset of overscroll required to fully expand the header.
   final double stretchTriggerOffset;
+
+  /// expandedBody: A widget to display when fully expanded as header or expandedBody above body.
   final Widget? expandedBody;
+
+  /// stretchMaxHeight: Height of the expandedBody widget. The height is a double between 0.0 and 0.95. The default value of height is 0.9 and should be greater than headerExpandedHeight
   final double stretchMaxHeight;
+
+  /// floatingActionButton: An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.
   final Widget? floatingActionButton;
+
+  /// bottomSheet: A persistent bottom sheet shows information that supplements the primary content of the app. A persistent bottom sheet remains visible even when the user interacts with other parts of the app.
+  final Widget? bottomSheet;
+
+  /// bottomNavigationBarHeight: This is requires when using custom height to adjust body height. This make no effect on bottomNavigationBar.
+  final double? bottomNavigationBarHeight;
+
+  /// bottomNavigationBar: Snack bars slide from underneath the bottom navigation bar while bottom sheets are stacked on top.
+  final Widget? bottomNavigationBar;
+
+  /// floatingActionButtonLocation: An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.
+
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  /// floatingActionButtonAnimator: Provider of animations to move the FloatingActionButton between FloatingActionButtonLocations.
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
   /// This will create DraggableHome.
@@ -32,8 +83,10 @@ class DraggableHome extends StatefulWidget {
     required this.title,
     this.centerTitle = true,
     this.actions,
+    this.alwaysShowLeadingAndAction = false,
     this.headerExpandedHeight = 0.35,
     required this.headerWidget,
+    this.headerBottomBar,
     this.backgroundColor,
     this.curvedBodyRadius = 20,
     required this.body,
@@ -42,6 +95,9 @@ class DraggableHome extends StatefulWidget {
     this.stretchTriggerOffset = 200,
     this.expandedBody,
     this.stretchMaxHeight = 0.9,
+    this.bottomSheet,
+    this.bottomNavigationBarHeight = kBottomNavigationBarHeight,
+    this.bottomNavigationBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.floatingActionButtonAnimator,
@@ -104,6 +160,8 @@ class _DraggableHomeState extends State<DraggableHome> {
         child: sliver(context, appBarHeight, fullyExpandedHeight,
             expandedHeight, topPadding),
       ),
+      bottomSheet: widget.bottomSheet,
+      bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
@@ -127,8 +185,16 @@ class _DraggableHomeState extends State<DraggableHome> {
             List<bool> streams = (snapshot.data ?? [false, false]);
 
             return SliverAppBar(
-              leading: widget.leading,
-              actions: widget.actions,
+              leading: widget.alwaysShowLeadingAndAction
+                  ? widget.leading
+                  : !streams[0]
+                      ? SizedBox()
+                      : widget.leading,
+              actions: widget.alwaysShowLeadingAndAction
+                  ? widget.actions
+                  : !streams[0]
+                      ? []
+                      : widget.actions,
               elevation: 0,
               pinned: true,
               stretch: true,
@@ -160,6 +226,25 @@ class _DraggableHomeState extends State<DraggableHome> {
                     left: 0,
                     right: 0,
                     child: roundedCorner(context),
+                  ),
+                  Positioned(
+                    bottom: 0 + widget.curvedBodyRadius,
+                    child: AnimatedContainer(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      curve: Curves.easeInOutCirc,
+                      duration: Duration(milliseconds: 100),
+                      height: streams[0]
+                          ? 0
+                          : streams[1]
+                              ? 0
+                              : kToolbarHeight,
+                      width: MediaQuery.of(context).size.width,
+                      child: streams[0]
+                          ? SizedBox()
+                          : streams[1]
+                              ? SizedBox()
+                              : widget.headerBottomBar ?? Container(),
+                    ),
                   )
                 ],
               ),
@@ -191,13 +276,17 @@ class _DraggableHomeState extends State<DraggableHome> {
   }
 
   SliverList sliverList(BuildContext context, double topHeight) {
+    final double bottomPadding =
+        widget.bottomNavigationBar == null ? 0 : kBottomNavigationBarHeight;
     return SliverList(
       delegate: SliverChildListDelegate(
         [
           Stack(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height - topHeight,
+                height: MediaQuery.of(context).size.height -
+                    topHeight -
+                    bottomPadding,
                 color: widget.backgroundColor ??
                     Theme.of(context).scaffoldBackgroundColor,
               ),
