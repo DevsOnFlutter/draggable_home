@@ -1,6 +1,6 @@
 # Draggable Home
 
-A draggable Flutter widget that makes implementing a Sliding up and fully-stretchable  much easier! Based on the Scaffold and Sliver.
+A draggable Flutter widget that makes implementing a Sliding up and fully-stretchable much easier! Based on the Scaffold and Sliver.
 
 <br>
 <p>
@@ -28,9 +28,9 @@ dependencies:
 *The complete example is available [here](https://github.com/4-alok/draggable_home/blob/main/example/lib/main.dart).*
 
 **DraggableHome** requires you to provide `title`, `headerWidget` and `body`:
-* `title` widget is basically for title in AppBar. For no title in appbar, simply put an empty Contnainer.
-* `headerWidget` is the expanded widget  just above body when not fully expanded.
-* `body` is in the form of Column which requires list of widget or a widget. Do not add any verically scrollable widge or you may just disable the scroll.
+* `title` widget is basically for a title in the AppBar. For no title in AppBar, simply pass an empty Container.
+* `headerWidget` is the expanded widget just above the body when not fully expanded.
+* `body` is in the form of Column which requires a list of widget or a widget. Do not add any vertically scrollable widget or you may just disable the scroll.
 ```dart
   physics: const NeverScrollableScrollPhysics()
 ```
@@ -39,7 +39,7 @@ dependencies:
 Sample code
 ```dart
 DraggableHome(
-  title: Text("Ttitle"),
+  title: Text("Title"),
   headerWidget: headerWidget(),
   body: [
     Container(...),
@@ -56,19 +56,19 @@ There are several options that allow for more control:
 | `leading` | A widget to display before the toolbar's title. |
 | `action` | A list of Widgets to display in a row after the title widget. |
 | `drawer` | Drawers are typically used with the Scaffold.drawer property. |
-| `centerTitle` | Allows toggling of title from the center. By default title is in the center.|
+| `centerTitle` | Allows toggling of title from the center. By default, title is in the center.|
 | `headerExpandedHeight` | Height of the header widget. The height is a double between 0.0 and 1.0. The default value of height is 0.35 and should be less than **stretchMaxHeight** |
-| `headerWidget` | A widget to display Header above body. |
-|`alwaysShowLeadingAndAction`| This make Leading and Action always visible. Default value is false. |
+| `headerWidget` | A widget to display Header above the body. |
+|`alwaysShowLeadingAndAction`| This makes Leading and Action always visible. Default value is false. |
 |`headerBottomBar`| AppBar or toolBar like widget just above the body. | 
 | `backgroundColor` | The color of the Material widget that underlies the entire DraggableHome body. |
-| `curvedBodyRadius` | Creates a border top left and top right radius of body, Default radius of the body is 20.0. For no radius simply set value to **0**.|
+| `curvedBodyRadius` | Creates a border top-left and top-right radius of body, Default radius of the body is 20.0. For no radius simply set the value to **0**.|
 | `fullyStretchable` | Allows toggling of fully expand draggability of the DraggableHome. Set this to true to allow the user to fully expand the header. |
 | `stretchTriggerOffset` | The offset of overscroll required to fully expand the header.|
-| `expandedBody` | A widget to display when fully expanded as header or expandedBody above body. |
+| `expandedBody` | A widget to display when fully expanded as header or expandedBody above the body. |
 | `stretchMaxHeight` | Height of the expandedBody widget. The height is a double between 0.0 and 0.95. The default value of height is 0.9 and should be greater than **headerExpandedHeight**  |
 | `bottomSheet` | A persistent bottom sheet shows information that supplements the primary content of the app. A persistent bottom sheet remains visible even when the user interacts with other parts of the app.|
-|`bottomNavigationBarHeight`| This is requires when using custom height to adjust body height. This make no effect on **bottomNavigationBar**.|
+|`bottomNavigationBarHeight`| This is required when using custom height to adjust body height. This makes no effect on **bottomNavigationBar**.|
 |`bottomNavigationBar` | Snack bars slide from underneath the bottom navigation bar while bottom sheets are stacked on top. |
 | `floatingActionButton` | A floating action button is a circular icon button that hovers over content to promote a primary action in the application. |
 | `floatingActionButtonLocation` | An object that defines a position for the FloatingActionButton based on the Scaffold's ScaffoldPrelayoutGeometry.|
@@ -83,13 +83,13 @@ There are several options that allow for more control:
 
 ```dart
 DraggableHome(
-  title: Text("Ttitle"),
+  title: Text("Title"),
   headerWidget: headerWidget(),
   body: [
     Container(...),
 
     // shrinkWrap true required for ListView.builder()
-    // disable the scroll for any verically scrollable widget
+    // disable the scroll for any vertically scrollable widget
     // provide top padding 0 to fix extra space in listView
     ListView.builder(
       padding: EdgeInsets.only(top: 0),
@@ -125,21 +125,21 @@ DraggableHome(
 
 ## Contributions
 
-Contributions are welcomed!
+Contributions are welcome!
 
-If you feel that a hook is missing, feel free to open a pull-request.
+If you feel that a hook is missing, feel free to open a Pull Request.
 
-For a custom-hook to be merged, you will need to do the following:
+For a custom hook to be merged, you will need to do the following:
 
-- Describe the use-case.
+- Describe the use case.
 
 -  Open an issue explaining why we need this hook, how to use it, ...
-  This is important as a hook will not get merged if the hook doens't appeal to
+  This is important as a hook will not get merged if the hook doesn't appeal to
   a large number of people.
 
 -  If your hook is rejected, don't worry! A rejection doesn't mean that it won't
-  be merged later in the future if more people shows an interest in it.
-  In the mean-time, feel free to publish your hook as a package on https://pub.dev.
+  be merged later in the future if more people show an interest in it.
+  In the meantime, feel free to publish your hook as a package on https://pub.dev.
 
--  A hook will not be merged unles fully tested, to avoid breaking it inadvertendly
+-  A hook will not be merged unless fully tested, to avoid breaking it inadvertently
   in the future.
