@@ -1,6 +1,5 @@
 library draggable_home;
 
-
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
