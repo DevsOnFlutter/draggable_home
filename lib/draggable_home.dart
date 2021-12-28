@@ -1,6 +1,5 @@
 library draggable_home;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -22,6 +21,9 @@ class DraggableHome extends StatefulWidget {
 
   /// Always Show Leading And Action : This make Leading and Action always visible. Default value is false.
   final bool alwaysShowLeadingAndAction;
+
+  /// Always Show Title : This make Title always visible. Default value is false.
+  final bool alwaysShowTitle;
 
   /// Drawer: Drawers are typically used with the Scaffold.drawer property.
   final Widget? drawer;
@@ -84,6 +86,7 @@ class DraggableHome extends StatefulWidget {
     this.centerTitle = true,
     this.actions,
     this.alwaysShowLeadingAndAction = false,
+    this.alwaysShowTitle = false,
     this.headerExpandedHeight = 0.35,
     required this.headerWidget,
     this.headerBottomBar,
@@ -202,11 +205,15 @@ class _DraggableHomeState extends State<DraggableHome> {
               title: StreamBuilder<bool>(
                 stream: null,
                 builder: (context, snapshot) {
-                  return AnimatedOpacity(
-                    opacity: streams[0] ? 1 : 0,
-                    duration: Duration(milliseconds: 100),
-                    child: widget.title,
-                  );
+                  if (widget.alwaysShowTitle) {
+                    return widget.title;
+                  } else {
+                    return AnimatedOpacity(
+                      opacity: streams[0] ? 1 : 0,
+                      duration: Duration(milliseconds: 100),
+                      child: widget.title,
+                    );
+                  }
                 },
               ),
               collapsedHeight: appBarHeight,
