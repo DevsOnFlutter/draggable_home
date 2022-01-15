@@ -179,7 +179,7 @@ class _DraggableHomeState extends State<DraggableHome> {
     double topPadding,
   ) {
     return CustomScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         StreamBuilder<List<bool>>(
           stream: CombineLatestStream.list<bool>(
@@ -193,7 +193,7 @@ class _DraggableHomeState extends State<DraggableHome> {
               leading: widget.alwaysShowLeadingAndAction
                   ? widget.leading
                   : !fullyCollapsed
-                      ? SizedBox()
+                      ? const SizedBox()
                       : widget.leading,
               actions: widget.alwaysShowLeadingAndAction
                   ? widget.actions
@@ -208,7 +208,7 @@ class _DraggableHomeState extends State<DraggableHome> {
                   ? widget.title
                   : AnimatedOpacity(
                       opacity: fullyCollapsed ? 1 : 0,
-                      duration: Duration(milliseconds: 100),
+                      duration: const Duration(milliseconds: 100),
                       child: widget.title,
                     ),
               collapsedHeight: appBarHeight,
@@ -234,9 +234,9 @@ class _DraggableHomeState extends State<DraggableHome> {
                   Positioned(
                     bottom: 0 + widget.curvedBodyRadius,
                     child: AnimatedContainer(
-                      padding: EdgeInsets.only(left: 10, right: 10),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
                       curve: Curves.easeInOutCirc,
-                      duration: Duration(milliseconds: 100),
+                      duration: const Duration(milliseconds: 100),
                       height: fullyCollapsed
                           ? 0
                           : fullyExpanded
@@ -244,9 +244,9 @@ class _DraggableHomeState extends State<DraggableHome> {
                               : kToolbarHeight,
                       width: MediaQuery.of(context).size.width,
                       child: fullyCollapsed
-                          ? SizedBox()
+                          ? const SizedBox()
                           : fullyExpanded
-                              ? SizedBox()
+                              ? const SizedBox()
                               : widget.headerBottomBar ?? Container(),
                     ),
                   )
@@ -313,7 +313,7 @@ class _DraggableHomeState extends State<DraggableHome> {
       stream: isFullyExpanded.stream,
       builder: (context, snapshot) {
         return AnimatedContainer(
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           height: (snapshot.data ?? false) ? 25 : 0,
           width: MediaQuery.of(context).size.width,
           child: Center(
