@@ -185,17 +185,19 @@ class _DraggableHomeState extends State<DraggableHome> {
           stream: CombineLatestStream.list<bool>(
               [isFullyCollapsed.stream, isFullyExpanded.stream]),
           builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
-            List<bool> streams = (snapshot.data ?? [false, false]);
+            final List<bool> streams = (snapshot.data ?? [false, false]);
+            final bool fullyCollapsed = streams[0];
+            final bool fullyExpanded = streams[1];
 
             return SliverAppBar(
               leading: widget.alwaysShowLeadingAndAction
                   ? widget.leading
-                  : !streams[0]
+                  : !fullyCollapsed
                       ? SizedBox()
                       : widget.leading,
               actions: widget.alwaysShowLeadingAndAction
                   ? widget.actions
-                  : !streams[0]
+                  : !fullyCollapsed
                       ? []
                       : widget.actions,
               elevation: 0,
@@ -205,21 +207,23 @@ class _DraggableHomeState extends State<DraggableHome> {
               title: widget.alwaysShowTitle
                   ? widget.title
                   : AnimatedOpacity(
-                      opacity: streams[0] ? 1 : 0,
+                      opacity: fullyCollapsed ? 1 : 0,
                       duration: Duration(milliseconds: 100),
                       child: widget.title,
                     ),
               collapsedHeight: appBarHeight,
-              expandedHeight: streams[1] ? fullyExpandedHeight : expandedHeight,
+              expandedHeight:
+                  fullyExpanded ? fullyExpandedHeight : expandedHeight,
               flexibleSpace: Stack(
                 children: [
                   FlexibleSpaceBar(
                     background: Container(
-                        child: streams[1]
-                            ? (widget.expandedBody == null
-                                ? Container()
-                                : widget.expandedBody)
-                            : widget.headerWidget),
+                      child: fullyExpanded
+                          ? (widget.expandedBody == null
+                              ? Container()
+                              : widget.expandedBody)
+                          : widget.headerWidget,
+                    ),
                   ),
                   Positioned(
                     bottom: -1,
@@ -233,15 +237,15 @@ class _DraggableHomeState extends State<DraggableHome> {
                       padding: EdgeInsets.only(left: 10, right: 10),
                       curve: Curves.easeInOutCirc,
                       duration: Duration(milliseconds: 100),
-                      height: streams[0]
+                      height: fullyCollapsed
                           ? 0
-                          : streams[1]
+                          : fullyExpanded
                               ? 0
                               : kToolbarHeight,
                       width: MediaQuery.of(context).size.width,
-                      child: streams[0]
+                      child: fullyCollapsed
                           ? SizedBox()
-                          : streams[1]
+                          : fullyExpanded
                               ? SizedBox()
                               : widget.headerBottomBar ?? Container(),
                     ),
@@ -251,7 +255,7 @@ class _DraggableHomeState extends State<DraggableHome> {
               stretchTriggerOffset: widget.stretchTriggerOffset,
               onStretchTrigger: widget.fullyStretchable
                   ? () async {
-                      if (streams[1] == false) isFullyExpanded.add(true);
+                      if (!fullyExpanded) isFullyExpanded.add(true);
                     }
                   : null,
             );
