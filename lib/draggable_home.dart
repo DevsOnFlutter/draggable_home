@@ -202,20 +202,13 @@ class _DraggableHomeState extends State<DraggableHome> {
               pinned: true,
               stretch: true,
               centerTitle: widget.centerTitle,
-              title: StreamBuilder<bool>(
-                stream: null,
-                builder: (context, snapshot) {
-                  if (widget.alwaysShowTitle) {
-                    return widget.title;
-                  } else {
-                    return AnimatedOpacity(
+              title: widget.alwaysShowTitle
+                  ? widget.title
+                  : AnimatedOpacity(
                       opacity: streams[0] ? 1 : 0,
                       duration: Duration(milliseconds: 100),
                       child: widget.title,
-                    );
-                  }
-                },
-              ),
+                    ),
               collapsedHeight: appBarHeight,
               expandedHeight: streams[1] ? fullyExpandedHeight : expandedHeight,
               flexibleSpace: Stack(
