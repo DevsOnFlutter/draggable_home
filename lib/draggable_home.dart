@@ -179,54 +179,49 @@ class _DraggableHomeState extends State<DraggableHome> {
     double topPadding,
   ) {
     return CustomScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         StreamBuilder<List<bool>>(
           stream: CombineLatestStream.list<bool>(
               [isFullyCollapsed.stream, isFullyExpanded.stream]),
           builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
-            List<bool> streams = (snapshot.data ?? [false, false]);
+            final List<bool> streams = (snapshot.data ?? [false, false]);
+            final bool fullyCollapsed = streams[0];
+            final bool fullyExpanded = streams[1];
 
             return SliverAppBar(
               leading: widget.alwaysShowLeadingAndAction
                   ? widget.leading
-                  : !streams[0]
-                      ? SizedBox()
+                  : !fullyCollapsed
+                      ? const SizedBox()
                       : widget.leading,
               actions: widget.alwaysShowLeadingAndAction
                   ? widget.actions
-                  : !streams[0]
+                  : !fullyCollapsed
                       ? []
                       : widget.actions,
               elevation: 0,
               pinned: true,
               stretch: true,
               centerTitle: widget.centerTitle,
-              title: StreamBuilder<bool>(
-                stream: null,
-                builder: (context, snapshot) {
-                  if (widget.alwaysShowTitle) {
-                    return widget.title;
-                  } else {
-                    return AnimatedOpacity(
-                      opacity: streams[0] ? 1 : 0,
-                      duration: Duration(milliseconds: 100),
+              title: widget.alwaysShowTitle
+                  ? widget.title
+                  : AnimatedOpacity(
+                      opacity: fullyCollapsed ? 1 : 0,
+                      duration: const Duration(milliseconds: 100),
                       child: widget.title,
-                    );
-                  }
-                },
-              ),
+                    ),
               collapsedHeight: appBarHeight,
-              expandedHeight: streams[1] ? fullyExpandedHeight : expandedHeight,
+              expandedHeight:
+                  fullyExpanded ? fullyExpandedHeight : expandedHeight,
               flexibleSpace: Stack(
                 children: [
                   FlexibleSpaceBar(
                     background: Container(
-                        child: streams[1]
-                            ? (widget.expandedBody == null
-                                ? Container()
-                                : widget.expandedBody)
-                            : widget.headerWidget),
+                      child: fullyExpanded
+                          ? (widget.expandedBody ?? const SizedBox())
+                          : widget.headerWidget,
+                    ),
                   ),
                   Positioned(
                     bottom: -1,
@@ -237,19 +232,19 @@ class _DraggableHomeState extends State<DraggableHome> {
                   Positioned(
                     bottom: 0 + widget.curvedBodyRadius,
                     child: AnimatedContainer(
-                      padding: EdgeInsets.only(left: 10, right: 10),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
                       curve: Curves.easeInOutCirc,
-                      duration: Duration(milliseconds: 100),
-                      height: streams[0]
+                      duration: const Duration(milliseconds: 100),
+                      height: fullyCollapsed
                           ? 0
-                          : streams[1]
+                          : fullyExpanded
                               ? 0
                               : kToolbarHeight,
                       width: MediaQuery.of(context).size.width,
-                      child: streams[0]
-                          ? SizedBox()
-                          : streams[1]
-                              ? SizedBox()
+                      child: fullyCollapsed
+                          ? const SizedBox()
+                          : fullyExpanded
+                              ? const SizedBox()
                               : widget.headerBottomBar ?? Container(),
                     ),
                   )
@@ -258,7 +253,7 @@ class _DraggableHomeState extends State<DraggableHome> {
               stretchTriggerOffset: widget.stretchTriggerOffset,
               onStretchTrigger: widget.fullyStretchable
                   ? () async {
-                      if (streams[1] == false) isFullyExpanded.add(true);
+                      if (!fullyExpanded) isFullyExpanded.add(true);
                     }
                   : null,
             );
@@ -313,19 +308,20 @@ class _DraggableHomeState extends State<DraggableHome> {
 
   StreamBuilder<bool> expandedUpArrow() {
     return StreamBuilder<bool>(
-        stream: isFullyExpanded.stream,
-        builder: (context, snapshot) {
-          return AnimatedContainer(
-            duration: Duration(milliseconds: 500),
-            height: (snapshot.data ?? false) ? 25 : 0,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Icon(
-                Icons.keyboard_arrow_up_rounded,
-                color: (snapshot.data ?? false) ? null : Colors.transparent,
-              ),
+      stream: isFullyExpanded.stream,
+      builder: (context, snapshot) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          height: (snapshot.data ?? false) ? 25 : 0,
+          width: MediaQuery.of(context).size.width,
+          child: Center(
+            child: Icon(
+              Icons.keyboard_arrow_up_rounded,
+              color: (snapshot.data ?? false) ? null : Colors.transparent,
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
