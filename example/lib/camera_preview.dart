@@ -26,7 +26,7 @@ class CameraPreview extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           backgroundColor: Colors.black.withOpacity(.5),
-                          child: Icon(
+                          child: const Icon(
                             Icons.bolt,
                             color: Colors.white,
                           ),
@@ -35,7 +35,7 @@ class CameraPreview extends StatelessWidget {
                     )),
                 Positioned(
                   bottom: 50,
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -49,7 +49,7 @@ class CameraPreview extends StatelessWidget {
                             height: 100,
                             width: 100,
                             alignment: Alignment.center,
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.white,
                             ),
