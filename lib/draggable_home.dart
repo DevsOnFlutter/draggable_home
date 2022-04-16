@@ -41,6 +41,9 @@ class DraggableHome extends StatefulWidget {
   /// backgroundColor: The color of the Material widget that underlies the entire DraggableHome body.
   final Color? backgroundColor;
 
+  /// appBarColor: The color of the scaffold app bar.
+  final Color? appBarColor;
+
   /// curvedBodyRadius: Creates a border top left and top right radius of body, Default radius of the body is 20.0. For no radius simply set value to 0.
   final double curvedBodyRadius;
 
@@ -91,6 +94,7 @@ class DraggableHome extends StatefulWidget {
     required this.headerWidget,
     this.headerBottomBar,
     this.backgroundColor,
+    this.appBarColor,
     this.curvedBodyRadius = 20,
     required this.body,
     this.drawer,
@@ -182,14 +186,18 @@ class _DraggableHomeState extends State<DraggableHome> {
       physics: const BouncingScrollPhysics(),
       slivers: [
         StreamBuilder<List<bool>>(
-          stream: CombineLatestStream.list<bool>(
-              [isFullyCollapsed.stream, isFullyExpanded.stream]),
+          stream: CombineLatestStream.list<bool>([
+            isFullyCollapsed.stream,
+            isFullyExpanded.stream,
+          ]),
           builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
             final List<bool> streams = (snapshot.data ?? [false, false]);
             final bool fullyCollapsed = streams[0];
             final bool fullyExpanded = streams[1];
 
             return SliverAppBar(
+              backgroundColor:
+                  !fullyCollapsed ? widget.backgroundColor : widget.appBarColor,
               leading: widget.alwaysShowLeadingAndAction
                   ? widget.leading
                   : !fullyCollapsed
@@ -218,6 +226,7 @@ class _DraggableHomeState extends State<DraggableHome> {
                 children: [
                   FlexibleSpaceBar(
                     background: Container(
+                      margin: const EdgeInsets.only(bottom: 0.2),
                       child: fullyExpanded
                           ? (widget.expandedBody ?? const SizedBox())
                           : widget.headerWidget,

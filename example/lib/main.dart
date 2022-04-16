@@ -35,6 +35,8 @@ class HomePage extends StatelessWidget {
       ],
       fullyStretchable: true,
       expandedBody: const CameraPreview(),
+      backgroundColor: Colors.white,
+      appBarColor: Colors.teal,
     );
   }
 
@@ -52,13 +54,20 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget headerWidget(BuildContext context) => Center(
-        child: Text("Title",
-            style: Theme.of(context)
-                .textTheme
-                .headline2!
-                .copyWith(color: Colors.white70)),
-      );
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: Center(
+        child: Text(
+          "Title",
+          style: Theme.of(context)
+              .textTheme
+              .headline2!
+              .copyWith(color: Colors.white70),
+        ),
+      ),
+    );
+  }
 
   ListView listView() {
     return ListView.builder(
