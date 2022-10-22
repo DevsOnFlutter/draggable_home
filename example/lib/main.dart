@@ -9,12 +9,10 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Draggable Home",
-      home: HomePage(),
-    );
-  }
+  Widget build(BuildContext context) => const MaterialApp(
+        title: "Draggable Home",
+        home: HomePage(),
+      );
 }
 
 class HomePage extends StatelessWidget {

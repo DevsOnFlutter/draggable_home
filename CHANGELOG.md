@@ -1,3 +1,9 @@
+# Change log
+
+## 1.0.4
+
+- add physics to modify the ScrollPhysics to implement some cases of UI when developers need (by default still is BouncingScrollPhysics)
+
 ## 1.0.3
 
 - Fixed Pixel line leak problem
