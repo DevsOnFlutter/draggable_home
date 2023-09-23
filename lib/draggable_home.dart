@@ -82,35 +82,38 @@ class DraggableHome extends StatefulWidget {
 
   final ScrollPhysics? physics;
 
+  final ScrollController? scrollController;
+
   /// This will create DraggableHome.
-  const DraggableHome(
-      {Key? key,
-      this.leading,
-      required this.title,
-      this.centerTitle = true,
-      this.actions,
-      this.alwaysShowLeadingAndAction = false,
-      this.alwaysShowTitle = false,
-      this.headerExpandedHeight = 0.35,
-      required this.headerWidget,
-      this.headerBottomBar,
-      this.backgroundColor,
-      this.appBarColor,
-      this.curvedBodyRadius = 20,
-      required this.body,
-      this.drawer,
-      this.fullyStretchable = false,
-      this.stretchTriggerOffset = 200,
-      this.expandedBody,
-      this.stretchMaxHeight = 0.9,
-      this.bottomSheet,
-      this.bottomNavigationBarHeight = kBottomNavigationBarHeight,
-      this.bottomNavigationBar,
-      this.floatingActionButton,
-      this.floatingActionButtonLocation,
-      this.floatingActionButtonAnimator,
-      this.physics})
-      : assert(headerExpandedHeight > 0.0 &&
+  const DraggableHome({
+    Key? key,
+    this.leading,
+    required this.title,
+    this.centerTitle = true,
+    this.actions,
+    this.alwaysShowLeadingAndAction = false,
+    this.alwaysShowTitle = false,
+    this.headerExpandedHeight = 0.35,
+    required this.headerWidget,
+    this.headerBottomBar,
+    this.backgroundColor,
+    this.appBarColor,
+    this.curvedBodyRadius = 20,
+    required this.body,
+    this.drawer,
+    this.fullyStretchable = false,
+    this.stretchTriggerOffset = 200,
+    this.expandedBody,
+    this.stretchMaxHeight = 0.9,
+    this.bottomSheet,
+    this.bottomNavigationBarHeight = kBottomNavigationBarHeight,
+    this.bottomNavigationBar,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
+    this.floatingActionButtonAnimator,
+    this.physics,
+    this.scrollController,
+  })  : assert(headerExpandedHeight > 0.0 &&
             headerExpandedHeight < stretchMaxHeight),
         assert(
           (stretchMaxHeight > headerExpandedHeight) && (stretchMaxHeight < .95),
@@ -186,6 +189,7 @@ class _DraggableHomeState extends State<DraggableHome> {
   ) {
     return CustomScrollView(
       physics: widget.physics ?? const BouncingScrollPhysics(),
+      controller: widget.scrollController,
       slivers: [
         StreamBuilder<List<bool>>(
           stream: CombineLatestStream.list<bool>([
