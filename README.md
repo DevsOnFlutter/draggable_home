@@ -62,6 +62,8 @@ There are several options that allow for more control:
 |`alwaysShowLeadingAndAction`| This makes Leading and Action always visible. Default value is false. |
 |`headerBottomBar`| AppBar or toolBar like widget just above the body. | 
 | `backgroundColor` | The color of the Material widget that underlies the entire DraggableHome body. |
+| `physics` | The physics property determines how the scroll view responds to user input, such as how it continues to animate after the user stops dragging the scroll view. |
+| `scrollController` | Used to control the position to which this scroll view is scrolled |
 | `curvedBodyRadius` | Creates a border top-left and top-right radius of body, Default radius of the body is 20.0. For no radius simply set the value to **0**.|
 | `fullyStretchable` | Allows toggling of fully expand draggability of the DraggableHome. Set this to true to allow the user to fully expand the header. |
 | `stretchTriggerOffset` | The offset of overscroll required to fully expand the header.|

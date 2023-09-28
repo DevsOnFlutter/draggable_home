@@ -80,8 +80,10 @@ class DraggableHome extends StatefulWidget {
   /// floatingActionButtonAnimator: Provider of animations to move the FloatingActionButton between FloatingActionButtonLocations.
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
+  /// physics: How the scroll view should respond to user input. For example, determines how the scroll view continues to animate after the user stops dragging the scroll view.
   final ScrollPhysics? physics;
 
+  /// scrollController: An object that can be used to control the position to which this scroll view is scrolled.
   final ScrollController? scrollController;
 
   /// This will create DraggableHome.

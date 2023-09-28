@@ -1,5 +1,9 @@
 # Change log
 
+## 1.0.5
+
+- added scrollController to get the current scroll position of the body
+
 ## 1.0.4
 
 - add physics to modify the ScrollPhysics to implement some cases of UI when developers need (by default still is BouncingScrollPhysics)

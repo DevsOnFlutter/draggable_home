@@ -39,11 +39,11 @@ class HomePage extends StatelessWidget {
   }
 
   Row headerBottomBarWidget() {
-    return Row(
+    return const Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
+      children: [
         Icon(
           Icons.settings,
           color: Colors.white,
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
           "Title",
           style: Theme.of(context)
               .textTheme
-              .headline2!
+              .displayMedium!
               .copyWith(color: Colors.white70),
         ),
       ),
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
             child: Text("$index"),
           ),
           title: const Text("Title"),
-          subtitle: const Text("Subtitile"),
+          subtitle: const Text("Subtitle"),
         ),
       ),
     );
