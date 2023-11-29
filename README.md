@@ -20,7 +20,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  draggable_home: ^1.0.2
+  draggable_home: ^1.0.5
 ```
 
 ### Basic setup
