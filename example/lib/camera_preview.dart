@@ -25,7 +25,7 @@ class CameraPreview extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.black.withOpacity(.5),
+                          backgroundColor: Colors.black.withValues(alpha: .5),
                           child: const Icon(
                             Icons.bolt,
                             color: Colors.white,
